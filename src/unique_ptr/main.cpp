@@ -59,6 +59,19 @@ int main()
 #endif
 
 
+#ifdef S5 
+	auto deleter = [](int* p)
+	{
+		std::cout<<"unique_ptr deleter called! \n"<<std::endl;delete p;
+	};
+
+	std::unique_ptr<int, decltype(deleter)> foo(new int, deleter);
+
+//	std::cout<<"use_count : "<<foo.use_count<<std::endl;
+
+
+#endif
+
 
 	std::cout<<"program end!"<<std::endl;
 	return 0;
