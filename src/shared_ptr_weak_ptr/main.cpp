@@ -132,10 +132,33 @@ int weakptr()
 
 }
 
+
+int check_expired()
+{
+	std::shared_ptr<int> pInt( new int);
+	std::weak_ptr<int> weak_pInt(pInt);
+
+	pInt.reset();
+
+	try{
+		std::cout<<"is expired? : "<<
+		weak_pInt.expired()//might be faster than use_count==0. 
+		<<std::endl;
+		std::cout<<"use_count : "<<weak_pInt.use_count()<<std::endl;
+		std::shared_ptr<int> error(weak_pInt);
+	}
+	catch (const std::exception& e)
+	{
+		std::cout<<"exception : "<<e.what()<<std::endl;
+	}
+}
+
+
 int main()
 {
 
 //	usage();
-	weakptr();
+//	weakptr();
+	check_expired();
 	return 0;
 }
