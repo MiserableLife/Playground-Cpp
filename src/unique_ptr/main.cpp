@@ -30,7 +30,7 @@ int main()
 	 * std::move can resolve */
 	int* x=new int;
 	std::unique_ptr<int> a(x);
-	std::unique_ptr<int> b = std::move(a); // error!!
+	std::unique_ptr<int> b = std::move(a); // no error!!
 	std::cout<<x<<std::endl;
 	std::cout<<b.get()<<std::endl;
 	std::cout<<a.get()<<std::endl;
@@ -71,6 +71,12 @@ int main()
 
 
 #endif
+
+	//unique_ptr can deal with array...  
+	std::unique_ptr<std::string []> up(new std::string[10]); 
+	up[0]; //unique_ptr knows  it is array 
+	*up ; // it is not defined for array 
+	//when it dies , it execute delete[]
 
 
 	std::cout<<"program end!"<<std::endl;
