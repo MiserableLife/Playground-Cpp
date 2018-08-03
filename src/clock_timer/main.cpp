@@ -60,6 +60,15 @@ std::setw(3)<< msec.count() <<std::endl;
 
 
 /*timepoint : combination of a duration and a epoch(beginning of a time) */
+	typedef std::chrono::system_clock::period scp;
+	//period : ratio to seconds => it cannot generate a variable. 
+	typedef std::ratio_multiply<scp,std::kilo> scp_ms;
+	std::cout<<std::fixed<<double(scp_ms::num) / scp_ms::den<<std::endl;
+	std::cout<<"is steady : "<<std::boolalpha<<std::chrono::system_clock::is_steady<<std::endl;
+
+
+	typedef std::chrono::high_resolution_clock::period hrcp;
+	typedef std::chrono::steady_clock::period stcp;
 
 
 	return 0;
